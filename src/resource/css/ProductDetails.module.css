@@ -30,3 +30,46 @@ width: 100%;
     width: 100%;
     height: 100%;
 }
+
+/* Right site variation and pd price  */
+
+.rightSiteWrapper{
+background-color: gray;
+width: 100%;
+
+     
+}
+.rightSiteWrapper h4{
+
+     font-size: 20px;
+}
+.offerPrice{
+    font-size: 17px ;
+    margin: 0px 10px;
+}
+.mainPrice{
+    font-size: 15px ;
+    margin: 0px 5px;
+    color: gray;
+}
+
+.discount{
+
+    font-size: 17px ;
+    font-weight: 800;
+    color: orange;
+}
+
+.veriationSmallBox{
+
+    border: 1px solid gray;
+    padding: 10px 15px ;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.veriationSmallBoxActive{
+
+    border: 1px solid rgb(255, 0, 0);
+    padding: 10px 15px ; 
+    background-color: rgba(0, 255, 255, 0.237);
+}

@@ -28,7 +28,7 @@ const ProductDetail = () => {
           <ImageGelery gallery={pdDetails?.gallery} />
         </div>
         <div className="col-md-6">
-          <RightSiteContent />
+          <RightSiteContent pdDetails={pdDetails} />
         </div>
       </div>
     );
