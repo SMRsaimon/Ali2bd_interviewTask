@@ -6,7 +6,7 @@ import { clearActiveVeriantDetails } from "./../../reduxStore/Product/getProduct
 const VeriationCard = ({ name, values }) => {
   const [value, setValue] = useState(values);
   const dispatch = useDispatch();
-  const activeDetails = useSelector((state) => state.product.activeVeriants);
+  const activeVeriants = useSelector((state) => state.product.activeVeriants);
 
   const activeVariant = (data, index) => {
     data.vType = name;
@@ -28,13 +28,16 @@ const VeriationCard = ({ name, values }) => {
 
     setValue(updateActiveStatus);
   };
-  console.log(value);
+
   return (
     <div className="card p-3 my-3">
       <div className="card-title mb-2">
         <span>
-          {/* {name && name}: {activeDetails && activeDetails.title}{" "} */}
-        </span>{" "}
+          {name && name}:{" "}
+          {activeVeriants.length
+            ? activeVeriants.find((x) => x.vType === name)?.title
+            : ""}
+        </span>
         <strong> </strong>
       </div>
 
