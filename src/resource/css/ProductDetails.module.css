@@ -3,6 +3,7 @@
 .imageGeleryWrapper{
 
     display: flex;
+    margin-top: 5px;
 
 }
 .leftImageWraper{
@@ -74,4 +75,9 @@ width: 100%;
     background-color: rgba(0, 255, 255, 0.237);
     margin-left: 10px;
     cursor: pointer;
+}
+
+.singleImageFullWidth{
+
+    width: 100%;
 }

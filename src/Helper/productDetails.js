@@ -13,3 +13,11 @@ export const getPercentOfDiscount = (oldPrice, afterDiscountPrice) => {
     return percent.toFixed(2);
   }
 };
+
+export const geSelectedVarientImageLink = (data, type) => {
+  if (data.length) {
+    return data.find((x) => x.vType === type)?.image || false;
+  } else {
+    return false;
+  }
+};
