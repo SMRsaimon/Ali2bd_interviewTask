@@ -1,5 +1,7 @@
 import { get } from "../../../Helper/api_helper";
 import {
+  ACTIVE_VERINT_PD_DETAILS,
+  CLEAR_ACTIVE_VERINT_PD_DETAILS,
   PRODUCT_DETAILS_ERROR,
   PRODUCT_DETAILS_LOADING,
   PRODUCT_DETAILS_SUCCESS,
@@ -20,6 +22,19 @@ export const getProductDetailsSuccess = (data) => {
 export const getProductDetailsError = (data) => {
   return {
     type: PRODUCT_DETAILS_ERROR,
+    payload: data,
+  };
+};
+
+export const activeVeriantDetails = (data) => {
+  return {
+    type: ACTIVE_VERINT_PD_DETAILS,
+    payload: data,
+  };
+};
+export const clearActiveVeriantDetails = (data) => {
+  return {
+    type: CLEAR_ACTIVE_VERINT_PD_DETAILS,
     payload: data,
   };
 };

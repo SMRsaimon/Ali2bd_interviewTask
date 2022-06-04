@@ -1,11 +1,18 @@
-import { PRODUCT_DETAILS_SUCCESS,PRODUCT_DETAILS_LOADING ,PRODUCT_DETAILS_ERROR} from "./actionTypes"
+import {
+  ACTIVE_VERINT_PD_DETAILS,
+  CLEAR_ACTIVE_VERINT_PD_DETAILS,
+  PRODUCT_DETAILS_ERROR,
+  PRODUCT_DETAILS_LOADING,
+  PRODUCT_DETAILS_SUCCESS,
+} from "./actionTypes";
 
 const initial_state = {
   productDetails: {},
   loading: false,
   err: false,
-  
-}
+  activeVeriants: [],
+  selectedVariations: [],
+};
 
 const productDetails = (state = initial_state, action) => {
   switch (action.type) {
@@ -13,25 +20,59 @@ const productDetails = (state = initial_state, action) => {
       return {
         ...state,
         loading: true,
-      }
+      };
     case PRODUCT_DETAILS_SUCCESS:
       return {
         ...state,
         loading: false,
         productDetails: action.payload,
         err: false,
-      }
+      };
     case PRODUCT_DETAILS_ERROR:
       return {
         ...state,
         loading: false,
-        productDetails:{},
+        productDetails: {},
         err: action.payload,
+      };
+    case ACTIVE_VERINT_PD_DETAILS:
+      const newVariations = [...state.activeVeriants];
+      if (newVariations.length) {
+        const checkVarientMatchData = newVariations.find(
+          (value) => value.vType === action.payload.vType
+        );
+
+        if (checkVarientMatchData) {
+          const matchingIndex = newVariations.findIndex(
+            (x) => x.vType === checkVarientMatchData.vType
+          );
+          newVariations.splice(matchingIndex, 1, action.payload);
+        } else {
+          newVariations.push(action.payload);
+        }
+      } else {
+        newVariations.push(action.payload);
       }
+
+      return {
+        ...state,
+        activeVeriants: [...newVariations],
+      };
+
+    case CLEAR_ACTIVE_VERINT_PD_DETAILS:
+      const variaTionsNew = [...state.activeVeriants];
+      const matchingIndex = variaTionsNew.findIndex(
+        (x) => x.vType === action.payload.vType
+      );
+      variaTionsNew.splice(matchingIndex, 1);
+
+      return {
+        ...state,
+        activeVeriants: [...variaTionsNew],
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-
-export default productDetails
+export default productDetails;
