@@ -5,10 +5,10 @@ import { getPercentOfDiscount } from "./../../Helper/productDetails";
 import VeriationCard from "./VeriationCard";
 
 const RightSiteContent = () => {
-  const { pdDetails, skus } = useSelector((state) => {
+  const { pdDetails, price } = useSelector((state) => {
     return {
       pdDetails: state.product.productDetails,
-      skus: state.product.skus,
+      price: state.product.updatedPrice,
     };
   });
   return (
@@ -22,17 +22,10 @@ const RightSiteContent = () => {
       <div className="card p-2 bg_white shadow my-3">
         <p>
           <strong>Price: </strong>{" "}
-          <strong className={styles.offerPrice}>
-            Rs. {pdDetails?.price?.discounted}
-          </strong>{" "}
-          <del className={styles.mainPrice}>Rs. {pdDetails?.price?.old} </del>{" "}
+          <strong className={styles.offerPrice}>Rs. {price?.discounted}</strong>{" "}
+          <del className={styles.mainPrice}>Rs. {price?.old} </del>{" "}
           <strong className={styles.discount}>
-            ({" "}
-            {getPercentOfDiscount(
-              pdDetails?.price?.old,
-              pdDetails?.price?.discounted
-            )}
-            % OFF)
+            ( {getPercentOfDiscount(price?.old, price?.discounted)}% OFF)
           </strong>
         </p>
       </div>

@@ -11,7 +11,7 @@ const initial_state = {
   loading: false,
   err: false,
   activeVeriants: [],
-
+  updatedPrice: {},
   skus: {},
 };
 
@@ -28,6 +28,7 @@ const productDetails = (state = initial_state, action) => {
         loading: false,
         productDetails: action.payload,
         err: false,
+        updatedPrice: action.payload.price,
       };
     case PRODUCT_DETAILS_ERROR:
       return {
@@ -65,17 +66,24 @@ const productDetails = (state = initial_state, action) => {
 
       const matchSkus = state.productDetails.variation.skus[skusIndex];
 
-      if (matchSkus) {
-        state.productDetails.price.discounted = matchSkus.price.discounted;
-        state.productDetails.price.old = matchSkus.price.old;
+      if (matchSkus?.price) {
+        return {
+          ...state,
+          activeVeriants: [...newVariations],
+          skus: matchSkus,
+          updatedPrice: {
+            ...state.updatedPrice,
+            discounted: matchSkus.price.discounted,
+            old: matchSkus.price.old,
+          },
+        };
+      } else {
+        return {
+          ...state,
+          activeVeriants: [...newVariations],
+          skus: matchSkus,
+        };
       }
-
-      return {
-        ...state,
-        activeVeriants: [...newVariations],
-        skus: matchSkus,
-        productDetails: state.productDetails,
-      };
 
     case CLEAR_ACTIVE_VERINT_PD_DETAILS:
       const variaTionsNew = [...state.activeVeriants];
@@ -88,6 +96,7 @@ const productDetails = (state = initial_state, action) => {
         ...state,
         activeVeriants: [...variaTionsNew],
         skus: {},
+        updatedPrice: state.productDetails.price,
       };
     default:
       return state;
